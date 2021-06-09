@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PostImg index{% endblock %}
+
+{% block body %}
+    <h1>PostImg index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Uri_img</th>
+                <th>Titulo</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post_img in post_imgs %}
+            <tr>
+                <td>{{ post_img.id }}</td>
+                <td>{{ post_img.uriImg }}</td>
+                <td>{{ post_img.titulo }}</td>
+                <td>{{ post_img.descripcion }}</td>
+                <td>
+                    <a href="{{ path('post_img_show', {'id': post_img.id}) }}">show</a>
+                    <a href="{{ path('post_img_edit', {'id': post_img.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('post_img_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}XIV SuperDuperImageViewer{% endblock %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+            
+        <link rel="stylesheet" href="{{ asset('css/app.css')}}">
+        {# <link rel="stylesheet" href="{{ asset('css/dashboard.css')}}"> #}
+    {% endblock %}
+
+{% block body %}
+{# <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> #}
+<nav class="navbar navbar-dark bg-dark" style="height: 100px;">
+    <a class="navbar-brand" href="#">
+        <i style="color: #fff ; font-size: 2rem;" class="pb-1 fad fa-cauldron"></i>
+        <p class="pl-4 d-inline font-weight-bold" style="color: #eaeaea;">Xtreme Image Viewer (XIV)</p> <span> El mejor visualizador de imagenes de la galaxia </span>
+    </a>
+  {# <div class="collapse navbar-collapse" >
+    <ul class="navbar-nav">
+          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ path('app_logout') }}"><button class="btn btn-danger">Salir</button></a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ path('app_login') }}"><button class="btn btn-primary">Subir imagen</button></a>
+            </li>
+      
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('app_login') }}"><button class="btn btn-dark">Iniciar sesion</button></a>
+            </li>
+          {% endif %}
+      
+
+      <li class="nav-item">
+        {% if is_granted('ROLE_ADMIN') %}
+          <a class="nav-link" href="{{ path('app_login') }}"><button class="btn btn-secondary">Aprobar imagenes</button></a>
+          <a class="nav-link" href="{{ path('app_login') }}"><button class="btn btn-warning">Subir archivo CSV</button></a>
+        {% endif %}
+      </li>
+    </ul>
+  </div> #}
+
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+      <a class="nav-link" href="{{ path('app_logout') }}"><button class="btn btn-danger">Salir</button></a>
+      <a class="nav-link" href="{{ path('post_img_new') }}"><button class="btn btn-primary">Subir imagen</button></a>
+    {% else %}
+      <a class="nav-link" href="{{ path('app_login') }}"><button class="btn btn-dark">Iniciar sesion</button></a>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+      <a class="nav-link" href="{{ path('app_login') }}"><button class="btn btn-secondary">Aprobar imagenes</button></a>
+      <a class="nav-link" href="{{ path('post_img_new') }}"><button class="btn btn-warning">Subir archivo CSV</button></a>
+    {% endif %}
+</nav>
+<!-- Page Content -->
+<div class="container">
+
+  <!-- Page Heading -->
+  <h1 class="my-4">Page Heading
+    <small>Secondary Text</small>
+  </h1>
+
+  <div class="row">
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="#">{{ controller_name }}</a>
+          </h4>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="#">Project Two</a>
+          </h4>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="#">Project Three</a>
+          </h4>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="#">Project Four</a>
+          </h4>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="#">Project Five</a>
+          </h4>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="#">Project Six</a>
+          </h4>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+
+  <!-- Pagination -->
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">3</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+    </li>
+  </ul>
+
+</div>
+<!-- /.container -->
+{% endblock %}
+{% block javascript %}
+
+    <script src="{{ asset('js/dashboard/dashboard.js') }}" type="text/javascript"></script>
+
+{% endblock %}

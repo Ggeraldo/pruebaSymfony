@@ -8,15 +8,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
     <link rel="stylesheet" href="{{ asset('css/loginform.css')}}">
 {% endblock %}
-{% block moreHead %}
-<style>
-    label   {color: white;}
-</style>
-{% endblock %}
+
 {% block body %}
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
-		<div class="card" style="height:auto; width:auto;">
+		<div class="card">
 			<div class="card-header">
 				<h3>Crear usuario</h3>
 				{# <div class="d-flex justify-content-end social_icon">
@@ -25,18 +21,14 @@
 					<span><i class="fab fa-twitter-square"></i></span>
 				</div> #}
 			</div>
-			<div class="card-body" >
-            	<div class="input-group form-group">
-                    <div class="input-group-prepend">
-                        {{ include('user/_form.html.twig') }}
+			<div class="card-body">
 
-                    </div>
-                </div>            
+                {{ include('user/_form.html.twig') }}
+
 			</div>
-
 			<div class="card-footer">
                 <div class="d-flex justify-content-center links">
-					O <a href="{{ path('dashboard') }}">Entrar como invitado</a>
+					O <a href="{{ path('user_new') }}">Entrar como invitado</a>
 				</div>
 			</div>
 		</div>
@@ -44,5 +36,5 @@
 </div>
 
 
-    <a href="{{ path('user_index') }}">Regresar</a>
+
 {% endblock %}
