@@ -43,6 +43,8 @@ class PostImgController extends AbstractController
             $postImg->setUriImg($filename);
             $userId = $this->getUser()->getId();
             $postImg->setUserId($userId);
+            $postImg->setEstado(0);
+            $postImg->setPulse(0);
             // echo '<pre>';
             // var_dump($userId); die;
             // this save to BD
@@ -50,11 +52,12 @@ class PostImgController extends AbstractController
             $entityManager->persist($postImg);
             $entityManager->flush();
 
-            return $this->redirectToRoute('post_img_index');
+            return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('post_img/new.html.twig', [
             'post_img' => $postImg,
+            'control' => 'a Imagen',
             'form' => $form->createView(),
         ]);
     }
@@ -76,7 +79,7 @@ class PostImgController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('post_img_index');
+            return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('post_img/edit.html.twig', [

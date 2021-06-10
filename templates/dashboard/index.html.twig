@@ -53,87 +53,44 @@
     {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
       <a class="nav-link" href="{{ path('app_login') }}"><button class="btn btn-secondary">Aprobar imagenes</button></a>
-      <a class="nav-link" href="{{ path('post_img_new') }}"><button class="btn btn-warning">Subir archivo CSV</button></a>
+      <a class="nav-link" href="{{ path('post_csv') }}"><button class="btn btn-warning">Subir archivo CSV</button></a>
     {% endif %}
 </nav>
 <!-- Page Content -->
 <div class="container">
 
   <!-- Page Heading -->
-  <h1 class="my-4">Page Heading
-    <small>Secondary Text</small>
+  <h1 class="my-4">
   </h1>
 
   <div class="row">
+  {% for post_img in post_imgs %}
     <div class="col-lg-6 mb-4">
       <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
+        <a href="#"><img class="card-img-top" {% if post_img.pulse != 1 %} src="{{ asset('uploads/') ~ post_img.uriImg }}" alt="{{ post_img.titulo }}" {% else %} src="{{ post_img.uriImg }}" alt="{{ post_img.titulo }}" {% endif %}></a>
         <div class="card-body">
           <h4 class="card-title">
-            <a href="#">{{ controller_name }}</a>
+            <a href="#">{{ post_img.titulo }}</a>
           </h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+          <p class="card-text">{{ post_img.descripcion }}</p>
+          <div calss="d-flex justify-content-center">
+          <a class="card-link " href="{{ path('post_img_show', {'id': post_img.id}) }}">Ver</a>
+          <a class="card-link" href="{{ path('post_img_edit', {'id': post_img.id}) }}">Editar</a> 
+          {{ include('post_img/_delete_form.html.twig') }}         
+          </div>
+
         </div>
       </div>
+        
     </div>
-    <div class="col-lg-6 mb-4">
-      <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
-        <div class="card-body">
-          <h4 class="card-title">
-            <a href="#">Project Two</a>
-          </h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 mb-4">
-      <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
-        <div class="card-body">
-          <h4 class="card-title">
-            <a href="#">Project Three</a>
-          </h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 mb-4">
-      <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
-        <div class="card-body">
-          <h4 class="card-title">
-            <a href="#">Project Four</a>
-          </h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 mb-4">
-      <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
-        <div class="card-body">
-          <h4 class="card-title">
-            <a href="#">Project Five</a>
-          </h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 mb-4">
-      <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/002/218/580/non_2x/modern-trendy-landing-page-template-with-sample-text-and-browser-mockup-vector.jpg" alt=""></a>
-        <div class="card-body">
-          <h4 class="card-title">
-            <a href="#">Project Six</a>
-          </h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
-        </div>
-      </div>
-    </div>
+  {% else %}
+    <tr>
+      <td colspan="5">Sin imagenes que mostrar :( </td>
+    </tr>
+  {% endfor %}
+
   </div>
   <!-- /.row -->
-
   <!-- Pagination -->
   <ul class="pagination justify-content-center">
     <li class="page-item">

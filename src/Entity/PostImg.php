@@ -37,6 +37,16 @@ class PostImg
      */
     private $userId;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $estado;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $pulse;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +96,30 @@ class PostImg
     public function setUserId(int $userId): self
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getEstado(): ?int
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(int $estado): self
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    public function getPulse(): ?int
+    {
+        return $this->pulse;
+    }
+
+    public function setPulse(int $pulse): self
+    {
+        $this->pulse = $pulse;
 
         return $this;
     }
